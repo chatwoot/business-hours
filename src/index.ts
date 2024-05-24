@@ -1,3 +1,10 @@
+/**
+ * Get the start and end time boundaries for a given date based on the provided start and end time strings.
+ * @param start - The start time string in the format "HH:mm".
+ * @param end - The end time string in the format "HH:mm".
+ * @param date - The date for which the boundaries are calculated.
+ * @returns An array containing the start and end time boundaries as Date objects.
+ */
 function getBoundaries(start: string, end: string, date: Date) {
   const [startHour, startMinute] = start.split(":").map(Number);
   const [endHour, endMinute] = end.split(":").map(Number);
@@ -11,16 +18,29 @@ function getBoundaries(start: string, end: string, date: Date) {
   return [startTime, endTime];
 }
 
+/**
+ * Add a specified number of seconds to a given date.
+ * @param date - The date to which the seconds are added.
+ * @param seconds - The number of seconds to add.
+ * @returns A new Date object with the added seconds.
+ */
 function addSeconds(date: Date, seconds: number): Date {
   return new Date(date.getTime() + seconds * 1000);
 }
 
+/**
+ * Represents a scheduler that manages working hours and holidays.
+ */
 export class Scheduler {
   private hours: {
     [day: number]: Array<{ start: string; end: string }> | null;
   };
   private holidays: Date[];
 
+  /**
+   * Creates a new instance of the Scheduler.
+   * @param config - The configuration object containing working hours and holidays.
+   */
   constructor(config: {
     hours: { [day: number]: Array<{ start: string; end: string }> | null };
     holidays: Date[];
@@ -29,6 +49,11 @@ export class Scheduler {
     this.holidays = config.holidays;
   }
 
+  /**
+   * Checks if a given date is a working day.
+   * @param date - The date to check.
+   * @returns True if the date is a working day, false otherwise.
+   */
   public isWorkingDay(date: Date): boolean {
     if (this.isHoliday(date)) {
       return false;
@@ -37,6 +62,11 @@ export class Scheduler {
     return workingHours !== null && workingHours.length > 0;
   }
 
+  /**
+   * Checks if a given date and time is within working hours.
+   * @param date - The date and time to check.
+   * @returns True if the date and time is within working hours, false otherwise.
+   */
   public isWorkingTime(date: Date): boolean {
     if (!this.isWorkingDay(date)) {
       return false;
@@ -56,6 +86,11 @@ export class Scheduler {
     return false;
   }
 
+  /**
+   * Checks if a given date is a holiday.
+   * @param date - The date to check.
+   * @returns True if the date is a holiday, false otherwise.
+   */
   public isHoliday(date: Date): boolean {
     const dateOnly = date.toDateString();
     return this.holidays.some((holiday) => holiday.toDateString() === dateOnly);
@@ -80,6 +115,11 @@ export class Scheduler {
     return nextTime;
   }
 
+  /**
+   * Get the next working day after a given date.
+   * @param date - The date after which the next working day is calculated.
+   * @returns The next working day as a Date object.
+   */
   public nextWorkingDay(date: Date): Date {
     let nextDay = new Date(date);
     nextDay.setDate(nextDay.getDate() + 1);
@@ -91,6 +131,11 @@ export class Scheduler {
     return nextDay;
   }
 
+  /**
+   * Get the remaining working time for a given date.
+   * @param date - The date for which the remaining working time is calculated.
+   * @returns The remaining working time in seconds.
+   */
   public getRemainingWorkingTime(date: Date): number {
     const workingHours = this.getWorkingHours(date);
 
@@ -107,6 +152,11 @@ export class Scheduler {
     return 0;
   }
 
+  /**
+   * Get the elapsed working time for a given date.
+   * @param date - The date for which the elapsed working time is calculated.
+   * @returns The elapsed working time in seconds.
+   */
   public getElapsedWorkingTime(date: Date): number {
     const workingHours = this.getWorkingHours(date);
 
@@ -123,6 +173,12 @@ export class Scheduler {
     return 0;
   }
 
+  /**
+   * Add a specified number of seconds to a given date.
+   * @param date - The date to which the seconds are added.
+   * @param seconds - The number of seconds to add.
+   * @returns A new Date object with the added seconds.
+   */
   public addTime(date: Date, seconds: number): Date {
     let newDate = new Date(date);
     let remainingSeconds = seconds;
@@ -142,6 +198,11 @@ export class Scheduler {
     return newDate;
   }
 
+  /**
+   * Get the working hours for a given date.
+   * @param date - The date for which the working hours are retrieved.
+   * @returns The working hours for the given date.
+   */
   private getWorkingHours(date: Date) {
     const dayOfWeek = date.getDay();
     return this.hours[dayOfWeek];

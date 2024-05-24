@@ -1,0 +1,52 @@
+{
+  "name": "@scmmishra/business-hours",
+  "description": "Compute business hours like a pro",
+  "version": "0.0.1",
+  "license": "MIT",
+  "homepage": "https://github.com/scmmishra/business-hours",
+  "keywords": [
+    "date-fns",
+    "business-hours"
+  ],
+  "repository": "https://github.com/scmmishra/business-hours",
+  "bugs": "https://github.com/scmmishra/business-hours/issues",
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "/dist"
+  ],
+  "scripts": {
+    "dev": "tsup --watch",
+    "build": "tsup",
+    "test": "vitest",
+    "size": "size-limit",
+    "coverage": "vitest run --coverage"
+  },
+  "devDependencies": {
+    "@size-limit/esbuild": "^11.1.4",
+    "@size-limit/esbuild-why": "^11.1.4",
+    "@size-limit/preset-small-lib": "^11.1.4",
+    "@types/node": "^20.12.12",
+    "@vitest/coverage-c8": "^0.33.0",
+    "jsdom": "^24.0.0",
+    "size-limit": "^11.1.4",
+    "tsup": "^8.0.2",
+    "typescript": "^5.4.5",
+    "vite": "^5.2.11",
+    "vitest": "^1.6.0"
+  },
+  "size-limit": [
+    {
+      "path": "dist/index.js",
+      "limit": "1.2 kB"
+    }
+  ]
+}

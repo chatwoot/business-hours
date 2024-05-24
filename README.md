@@ -18,7 +18,7 @@ yarn add @scmmishra/business-hours
 
 ## Usage
 
-PicoSearch exposes a single function: `picoSearch()`. This function takes an array of objects, a search term, an array of keys to search against, and an optional algorithm argument. It returns an array of objects that match the search term. You can find the [typedoc here](https://paka.dev/npm/@scmmishra/business-hours/api)
+You need to initialize the scheduler using the following options, the hours defines the schedule for each day of the week, and the holidays is an array of `Date` objects.
 
 ```typescript
 const scheduler = new Scheduler({

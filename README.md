@@ -89,7 +89,7 @@ scheduler.isHoliday(new Date("2024-03-08"));
 
 ### `addTime`
 
-This method takes a datetime, along with the time to add in seconds and returns the new date. If the date is outside working hours, it will add it to the working hours, suppose the working hours is between 8AM to 5PM, and I pass it 7:30 PM and ask it to add 10 mins, it will return 8:10 PM.
+This method takes a datetime, along with the time to add in seconds and returns the new date. If the date is outside working hours, it will add it to the working hours, suppose the working hours is between 8AM to 5PM, and I pass it 7:30 PM and ask it to add 10 mins, it will return 8:10 AM.
 
 ```js
 scheduler.addTime(new Date("2024-03-08"), 3600);

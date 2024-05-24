@@ -35,7 +35,7 @@
     "@size-limit/esbuild-why": "^11.1.4",
     "@size-limit/preset-small-lib": "^11.1.4",
     "@types/node": "^20.12.12",
-    "@vitest/coverage-istanbul": "^1.6.0",
+    "@vitest/coverage-v8": "^1.6.0",
     "jsdom": "^24.0.0",
     "size-limit": "^11.1.4",
     "tsup": "^8.0.2",

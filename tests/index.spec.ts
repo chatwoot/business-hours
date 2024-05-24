@@ -77,3 +77,18 @@ test("addTime should add time to the next working time if outside working hours"
   const expectedDate = new Date("2024-03-12T09:10:00");
   expect(scheduler.addTime(date, 600)).toEqual(expectedDate);
 });
+
+test("getElapsedWorkingTime should return the elapsed working time within working hours", () => {
+  const date = new Date("2024-03-11T10:30:00");
+  expect(scheduler.getElapsedWorkingTime(date)).toBe(5400);
+});
+
+test("getElapsedWorkingTime should return 0 for a non-working time", () => {
+  const date = new Date("2024-03-11T20:00:00");
+  expect(scheduler.getElapsedWorkingTime(date)).toBe(0);
+});
+
+test("getElapsedWorkingTime should return 0 for a holiday", () => {
+  const date = new Date("2024-03-08T10:00:00");
+  expect(scheduler.getElapsedWorkingTime(date)).toBe(3600);
+});

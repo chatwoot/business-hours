@@ -1,25 +1,58 @@
-## Business Hours
+<div align="center">
+<br>
+<br>
+<p>
+  <h1>Business Hours</h1>
+</p>
+<br>
+<br>
 
-We export a class called Scheduler
+[Try on CodeSandbox](https://codesandbox.io/s/picosearch-demo-i79btf)
 
-```js
-import { Scheduler } from '@scmmishra/business-hours'
+## Installation
 
-const scheduler = new Scheduler({
-  hours: {
-    0: null
-    1: [{start, end}, {start, end}]
-    2: [{start, end}, {start, end}]
-    3: [{start, end}]
-    4: [{start, end}]
-    5: [{start, end}]
-    6: null
-  }
-  holidays: ['2024-03-08', '2024-03-09','2024-03-10']
-})
+```sh
+pnpm install @scmmishra/business-hours
 ```
 
-Then the Scheduler object will have the following methods
+```sh
+npm install @scmmishra/business-hours
+```
+
+```sh
+yarn add @scmmishra/business-hours
+```
+
+## Usage
+
+PicoSearch exposes a single function: `picoSearch()`. This function takes an array of objects, a search term, an array of keys to search against, and an optional algorithm argument. It returns an array of objects that match the search term. You can find the [typedoc here](https://paka.dev/npm/@scmmishra/business-hours/api)
+
+```typescript
+const scheduler = new Scheduler({
+  hours: {
+    0: null,
+    1: [
+      { start: "09:00", end: "12:00" },
+      { start: "13:00", end: "18:00" },
+    ],
+    2: [
+      { start: "09:00", end: "12:00" },
+      { start: "13:00", end: "18:00" },
+    ],
+    3: [{ start: "09:00", end: "12:00" }],
+    4: [{ start: "09:00", end: "18:00" }],
+    5: [{ start: "09:00", end: "18:00" }],
+    6: null,
+  },
+  holidays: [
+    new Date("2024-03-08"),
+    new Date("2024-03-09"),
+    new Date("2024-03-10"),
+  ],
+});
+```
+
+## Methods available
 
 ### `nextWorkingTime`
 
@@ -69,7 +102,7 @@ This method takes a datetime, along with the time to add in seconds and returns 
 scheduler.addTime(new Date("2024-03-08"), 3600);
 ```
 
-### `subtractTime` [PENDING]
+### `subtractTime` [IMPLEMENTATION PENDING]
 
 This method takes a datetime, along with the time to subtract in seconds and returns the new date. If the date is outside working hours, it will subtract it from the working hours, suppose the working hours is between 8AM to 5PM, and I pass it 7:30 PM and ask it to subtract 10 mins, it will return 4:50 PM. Basically it traversed back to the previous working hour/day and subtracted the time from the working hours.
 
@@ -77,7 +110,7 @@ This method takes a datetime, along with the time to subtract in seconds and ret
 scheduler.addTime(new Date("2024-03-08"), 3600);
 ```
 
-### `diff` [PENDING]
+### `diff` [IMPLEMENTATION PENDING]
 
 This method calculates the difference between two moments, counting only working time between them
 

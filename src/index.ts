@@ -33,10 +33,7 @@ export class Scheduler {
     if (this.isHoliday(date)) {
       return false;
     }
-
-    const dayOfWeek = date.getDay();
-    const workingHours = this.hours[dayOfWeek];
-
+    const workingHours = this.getWorkingHours(date);
     return workingHours !== null && workingHours.length > 0;
   }
 
@@ -45,9 +42,7 @@ export class Scheduler {
       return false;
     }
 
-    const dayOfWeek = date.getDay();
-    const workingHours = this.hours[dayOfWeek];
-
+    const workingHours = this.getWorkingHours(date);
     if (workingHours) {
       for (const { start, end } of workingHours) {
         const [startTime, endTime] = getBoundaries(start, end, date);
@@ -97,8 +92,7 @@ export class Scheduler {
   }
 
   public getRemainingWorkingTime(date: Date): number {
-    const dayOfWeek = date.getDay();
-    const workingHours = this.hours[dayOfWeek];
+    const workingHours = this.getWorkingHours(date);
 
     if (workingHours) {
       for (const { start, end } of workingHours) {
@@ -114,8 +108,7 @@ export class Scheduler {
   }
 
   public getElapsedWorkingTime(date: Date): number {
-    const dayOfWeek = date.getDay();
-    const workingHours = this.hours[dayOfWeek];
+    const workingHours = this.getWorkingHours(date);
 
     if (workingHours) {
       for (const { start, end } of workingHours) {
@@ -147,5 +140,10 @@ export class Scheduler {
     }
 
     return newDate;
+  }
+
+  private getWorkingHours(date: Date) {
+    const dayOfWeek = date.getDay();
+    return this.hours[dayOfWeek];
   }
 }

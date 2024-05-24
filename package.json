@@ -1,7 +1,7 @@
 {
   "name": "@scmmishra/business-hours",
   "description": "Compute business hours like a pro",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "license": "MIT",
   "homepage": "https://github.com/scmmishra/business-hours",
   "keywords": [

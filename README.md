@@ -1,13 +1,6 @@
 <div align="center">
-<br>
-<br>
-<p>
   <h1>Business Hours</h1>
-</p>
-<br>
-<br>
-
-[Try on CodeSandbox](https://codesandbox.io/s/picosearch-demo-i79btf)
+</div>
 
 ## Installation
 

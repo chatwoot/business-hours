@@ -1,3 +1,20 @@
+function getBoundaries(start: string, end: string, date: Date) {
+  const [startHour, startMinute] = start.split(":").map(Number);
+  const [endHour, endMinute] = end.split(":").map(Number);
+
+  const startTime = new Date(date);
+  startTime.setHours(startHour, startMinute, 0, 0);
+
+  const endTime = new Date(date);
+  endTime.setHours(endHour, endMinute, 0, 0);
+
+  return [startTime, endTime];
+}
+
+function addSeconds(date: Date, seconds: number): Date {
+  return new Date(date.getTime() + seconds * 1000);
+}
+
 export class Scheduler {
   private hours: {
     [day: number]: Array<{ start: string; end: string }> | null;
@@ -33,14 +50,7 @@ export class Scheduler {
 
     if (workingHours) {
       for (const { start, end } of workingHours) {
-        const [startHour, startMinute] = start.split(":").map(Number);
-        const [endHour, endMinute] = end.split(":").map(Number);
-
-        const startTime = new Date(date);
-        startTime.setHours(startHour, startMinute, 0, 0);
-
-        const endTime = new Date(date);
-        endTime.setHours(endHour, endMinute, 0, 0);
+        const [startTime, endTime] = getBoundaries(start, end, date);
 
         if (date >= startTime && date <= endTime) {
           return true;
@@ -86,18 +96,56 @@ export class Scheduler {
     return nextDay;
   }
 
+  public getRemainingWorkingTime(date: Date): number {
+    const dayOfWeek = date.getDay();
+    const workingHours = this.hours[dayOfWeek];
+
+    if (workingHours) {
+      for (const { start, end } of workingHours) {
+        const [startTime, endTime] = getBoundaries(start, end, date);
+
+        if (date >= startTime && date < endTime) {
+          return Math.floor((endTime.getTime() - date.getTime()) / 1000);
+        }
+      }
+    }
+
+    return 0;
+  }
+
+  public getElapsedWorkingTime(date: Date): number {
+    const dayOfWeek = date.getDay();
+    const workingHours = this.hours[dayOfWeek];
+
+    if (workingHours) {
+      for (const { start, end } of workingHours) {
+        const [startTime, endTime] = getBoundaries(start, end, date);
+
+        if (date >= startTime && date < endTime) {
+          return Math.floor((date.getTime() - startTime.getTime()) / 1000);
+        }
+      }
+    }
+
+    return 0;
+  }
+
   public addTime(date: Date, seconds: number): Date {
-    // TODO: Implement addTime logic
-    throw new Error("Method not implemented.");
-  }
+    let newDate = new Date(date);
+    let remainingSeconds = seconds;
 
-  public subtractTime(date: Date, seconds: number): Date {
-    // TODO: Implement subtractTime logic
-    throw new Error("Method not implemented.");
-  }
+    while (remainingSeconds > 0) {
+      const currentDayWorkingTime = this.getRemainingWorkingTime(newDate);
 
-  public diff(startDate: Date, endDate: Date): number {
-    // TODO: Implement diff logic
-    throw new Error("Method not implemented.");
+      if (remainingSeconds <= currentDayWorkingTime) {
+        newDate = addSeconds(newDate, remainingSeconds);
+        remainingSeconds = 0;
+      } else {
+        remainingSeconds -= currentDayWorkingTime;
+        newDate = this.nextWorkingTime(newDate);
+      }
+    }
+
+    return newDate;
   }
 }

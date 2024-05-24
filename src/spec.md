@@ -69,7 +69,7 @@ This method takes a datetime, along with the time to add in seconds and returns 
 scheduler.addTime(new Date("2024-03-08"), 3600);
 ```
 
-### `subtractTime`
+### `subtractTime` [PENDING]
 
 This method takes a datetime, along with the time to subtract in seconds and returns the new date. If the date is outside working hours, it will subtract it from the working hours, suppose the working hours is between 8AM to 5PM, and I pass it 7:30 PM and ask it to subtract 10 mins, it will return 4:50 PM. Basically it traversed back to the previous working hour/day and subtracted the time from the working hours.
 
@@ -77,7 +77,7 @@ This method takes a datetime, along with the time to subtract in seconds and ret
 scheduler.addTime(new Date("2024-03-08"), 3600);
 ```
 
-### `diff`
+### `diff` [PENDING]
 
 This method calculates the difference between two moments, counting only working time between them
 

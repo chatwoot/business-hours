@@ -1,6 +1,14 @@
 <div align="center">
   <h1>Business Hours</h1>
+  
+  ![npm](https://img.shields.io/npm/dm/%40scmmishra%2Fbusiness-hours) ![Less than 1KB](https://deno.bundlejs.com/?q=@scmmishra/business-hours&badge)
+  <br>
+  ![DeepSource](https://deepsource.io/gh/scmmishra/business-hours.svg/?label=active+issues&show_trend=true&token=_HAIDwNbi1ocMhaBKxB_BcSQ)
+  ![DeepSource](https://deepsource.io/gh/scmmishra/business-hours.svg/?label=resolved+issues&show_trend=true&token=_HAIDwNbi1ocMhaBKxB_BcSQ)
+
 </div>
+
+
 
 ## Installation
 
@@ -21,6 +29,8 @@ yarn add @scmmishra/business-hours
 You need to initialize the scheduler using the following options, the hours defines the schedule for each day of the week, and the holidays is an array of `Date` objects.
 
 ```typescript
+import { Scheduler } from '@scmmishra/business-hours'
+
 const scheduler = new Scheduler({
   hours: {
     0: null,

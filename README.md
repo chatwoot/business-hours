@@ -8,8 +8,6 @@
 
 </div>
 
-
-
 ## Installation
 
 ```sh
@@ -29,7 +27,7 @@ yarn add @scmmishra/business-hours
 You need to initialize the scheduler using the following options, the hours defines the schedule for each day of the week, and the holidays is an array of `Date` objects.
 
 ```typescript
-import { Scheduler } from '@scmmishra/business-hours'
+import { Scheduler } from "@scmmishra/business-hours";
 
 const scheduler = new Scheduler({
   hours: {

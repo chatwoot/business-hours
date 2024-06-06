@@ -1,15 +1,15 @@
 {
-  "name": "@scmmishra/business-hours",
+  "name": "@chatwoot/business-hours",
   "description": "Compute business hours like a pro",
   "version": "0.0.3",
   "license": "MIT",
-  "homepage": "https://github.com/scmmishra/business-hours",
+  "homepage": "https://github.com/chatwoot/business-hours",
   "keywords": [
     "date",
     "business-hours"
   ],
-  "repository": "https://github.com/scmmishra/business-hours",
-  "bugs": "https://github.com/scmmishra/business-hours/issues",
+  "repository": "https://github.com/chatwoot/business-hours",
+  "bugs": "https://github.com/chatwoot/business-hours/issues",
   "exports": {
     ".": {
       "require": "./dist/index.js",

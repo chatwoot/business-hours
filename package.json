@@ -8,7 +8,10 @@
     "date",
     "business-hours"
   ],
-  "repository": "https://github.com/chatwoot/business-hours",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chatwoot/business-hours.git"
+  },
   "bugs": "https://github.com/chatwoot/business-hours/issues",
   "exports": {
     ".": {

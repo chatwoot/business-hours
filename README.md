@@ -1,7 +1,7 @@
 <div align="center">
   <h1>Business Hours</h1>
   
-  ![npm](https://img.shields.io/npm/dm/%40chatwoot%2Fbusiness-hours) ![Less than 1KB](https://deno.bundlejs.com/?q=@chatwoot/business-hours&badge)
+<!--  ![npm](https://img.shields.io/npm/dm/%40chatwoot%2Fbusiness-hours) ![Less than 1KB](https://deno.bundlejs.com/?q=@chatwoot/business-hours&badge) -->
 
 </div>
 

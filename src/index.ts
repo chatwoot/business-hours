@@ -1,32 +1,4 @@
-/**
- * Get the start and end time boundaries for a given date based on the provided start and end time strings.
- * @param start - The start time string in the format "HH:mm".
- * @param end - The end time string in the format "HH:mm".
- * @param date - The date for which the boundaries are calculated.
- * @returns An array containing the start and end time boundaries as Date objects.
- */
-function getBoundaries(start: string, end: string, date: Date) {
-  const [startHour, startMinute] = start.split(":").map(Number);
-  const [endHour, endMinute] = end.split(":").map(Number);
-
-  const startTime = new Date(date);
-  startTime.setHours(startHour, startMinute, 0, 0);
-
-  const endTime = new Date(date);
-  endTime.setHours(endHour, endMinute, 0, 0);
-
-  return [startTime, endTime];
-}
-
-/**
- * Add a specified number of seconds to a given date.
- * @param date - The date to which the seconds are added.
- * @param seconds - The number of seconds to add.
- * @returns A new Date object with the added seconds.
- */
-function addSeconds(date: Date, seconds: number): Date {
-  return new Date(date.getTime() + seconds * 1000);
-}
+import { getBoundaries, addSeconds, getOffset } from "./utils";
 
 /**
  * Represents a scheduler that manages working hours and holidays.
@@ -36,6 +8,8 @@ export class Scheduler {
     [day: number]: Array<{ start: string; end: string }> | null;
   };
   private holidays: Date[];
+  private timezone: string;
+  private tzOffset: number;
 
   /**
    * Creates a new instance of the Scheduler.
@@ -43,10 +17,14 @@ export class Scheduler {
    */
   constructor(config: {
     hours: { [day: number]: Array<{ start: string; end: string }> | null };
-    holidays: Date[];
+    holidays?: Date[];
+    timezone?: string;
   }) {
     this.hours = config.hours;
-    this.holidays = config.holidays;
+    this.holidays = config.holidays || [];
+    this.timezone =
+      config.timezone || Intl.DateTimeFormat().resolvedOptions().timeZone;
+    this.tzOffset = getOffset(this.timezone);
   }
 
   /**
